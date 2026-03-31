@@ -61,4 +61,4 @@ app.post("/api/pix", async (req, res) => {
 });
 
 // 🚀 iniciar servidor
-app.listen(3000, () => console.log("Rodando"));
+app.listen(process.env.PORT || 3000, () => console.log("Rodando"));
