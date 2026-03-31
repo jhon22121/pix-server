@@ -1,11 +1,11 @@
 const cors = require("cors");
-app.use(cors());
 const express = require("express");
 const axios = require("axios");
 const crypto = require("crypto");
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // 🔐 pega do Render (Environment Variables)
 const API_KEY = process.env.API_KEY;
