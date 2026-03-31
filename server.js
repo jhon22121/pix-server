@@ -5,9 +5,11 @@ const crypto = require("crypto");
 const app = express();
 app.use(express.json());
 
+// 🔐 pega do Render (Environment Variables)
 const API_KEY = process.env.API_KEY;
 const API_SECRET = process.env.API_SECRET;
 
+// 🔐 função de assinatura (fica antes de usar)
 function sign(body) {
   const ts = Math.floor(Date.now() / 1000).toString();
 
@@ -19,6 +21,12 @@ function sign(body) {
   return { ts, signature };
 }
 
+// 🧪 rota teste (pra não aparecer "Cannot GET /")
+app.get("/", (req, res) => {
+  res.send("Servidor funcionando 🚀");
+});
+
+// 💰 rota que gera PIX
 app.post("/api/pix", async (req, res) => {
   try {
     const body = JSON.stringify({
@@ -45,8 +53,10 @@ app.post("/api/pix", async (req, res) => {
     res.json(response.data.payment);
 
   } catch (err) {
-    res.status(500).send("Erro");
+    console.error(err.response?.data || err.message);
+    res.status(500).send("Erro ao gerar PIX");
   }
 });
 
+// 🚀 iniciar servidor
 app.listen(3000, () => console.log("Rodando"));
