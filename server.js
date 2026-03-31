@@ -5,8 +5,8 @@ const crypto = require("crypto");
 const app = express();
 app.use(express.json());
 
-const API_KEY = "c7_live_f333452c0d48e3e2ba9dc58e7a5aa41c0c79629b4a9aaf732aed948e04acc01b";
-const API_SECRET = "dcb854ddd68651aec85e1f9994d3bd50f92e601fd0399c481f6a6fd781a3685fcd530ee0a9154a8820fb8d9c97b5ac72c5c0849bfc31501dd0b8881c7b6e290e";
+const API_KEY = process.env.API_KEY;
+const API_SECRET = process.env.API_SECRET;
 
 function sign(body) {
   const ts = Math.floor(Date.now() / 1000).toString();
